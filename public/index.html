@@ -1,0 +1,42 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to LocalFlix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Local Stream Flix!</h1>
+    </div>
+    <ul id="video-list"></ul>
+
+    <button id="dark-mode-toggle">Toggle Dark Mode</button>
+
+    <script>
+        document.getElementById('dark-mode-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+        });
+
+        fetch('/videos')
+            .then(response => response.json())
+            .then(videoFiles => {
+                const videoList = document.getElementById('video-list');
+                videoFiles.forEach(file => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.textContent = file;
+                    link.href = `/videos/${encodeURIComponent(file)}`;
+                    listItem.appendChild(link);
+                    videoList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching videos:', error));
+    </script>
+</body>
+
+</html>
