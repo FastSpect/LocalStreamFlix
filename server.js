@@ -16,20 +16,24 @@ app.get("/", (req, res) => {
 });
 
 app.get("/videos", (req, res) => {
-    fs.readdir(videoFolderPath, (err, files) => {
+    fs.readdir(videoFolderPath, { withFileTypes: true }, (err, items) => {
         if (err) {
             console.error("Error reading directory:", err);
             res.status(500).send("Internal Server Error");
             return;
         }
-        const videoFiles = files.filter((file) => {
-            return [".mp4", ".avi", ".mkv"].includes(
-                path.extname(file).toLowerCase()
-            );
-        });
-        res.send(videoFiles);
+        const videoFiles = items
+            .filter(item => item.isFile() && [".mp4", ".avi", ".mkv"].includes(path.extname(item.name).toLowerCase()))
+            .map(item => item.name);
+        const folders = items
+            .filter(item => item.isDirectory())
+            .map(item => item.name);
+        console.log("Video files:", videoFiles);
+        console.log("Folders:", folders);
+        res.send({ videos: videoFiles, folders: folders });
     });
 });
+
 
 app.get("/videos/:filename", (req, res) => {
     const filename = req.params.filename;
