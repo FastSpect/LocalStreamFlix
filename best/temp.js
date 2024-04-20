@@ -1,4 +1,5 @@
 const track = document.getElementById("image-track");
+var img = document.getElementById("imageid");
 
 window.onmousedown = (e) => {
     track.dataset.mouseDownAt = e.clientX;
