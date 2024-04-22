@@ -1,24 +1,40 @@
+let scrollContainer = document.querySelector(".video-list");
+
+scrollContainer.addEventListener("wheel", (event) => {
+    event.preventDefault();
+    scrollContainer.scrollLeft += event.deltaY;
+    scrollContainer.style.scrollBehavior = "smooth";
+});
+
 function fetchVideosAndFolders(endpoint) {
     fetch(endpoint)
         .then((response) => response.json())
         .then((data) => {
-            const videoList = document.getElementById("video-list");
-
+            const videoList = document.querySelector(".video-list");
             videoList.innerHTML = "";
-
-            console.log("Current Path:", data.path);
+            let div;
+            let spanCount = 0;
 
             data.videos.forEach((file) => {
-                const listItem = document.createElement("li");
+                if (spanCount % 3 === 0) {
+                    div = document.createElement("div");
+                    videoList.appendChild(div);
+                }
+                const span = document.createElement("span");
                 const link = document.createElement("a");
                 link.textContent = file;
                 link.href = `/video/${encodeURIComponent(data.path + file)}`;
-                listItem.appendChild(link);
-                videoList.appendChild(listItem);
+                span.appendChild(link);
+                div.appendChild(span);
+                spanCount++;
             });
 
             data.folders.forEach((folder) => {
-                const listItem = document.createElement("li");
+                if (spanCount % 3 === 0) {
+                    div = document.createElement("div");
+                    videoList.appendChild(div);
+                }
+                const span = document.createElement("span");
                 const link = document.createElement("a");
                 link.textContent = folder;
 
@@ -29,9 +45,11 @@ function fetchVideosAndFolders(endpoint) {
                     )}`;
                     fetchVideosAndFolders(`/videos${folderPath}/`);
                 };
-                listItem.appendChild(link);
-                videoList.appendChild(listItem);
+                span.appendChild(link);
+                div.appendChild(span);
+                spanCount++;
             });
+            videoList.appendChild(div);
         })
         .catch((error) =>
             console.error("Error fetching videos and folders:", error)
