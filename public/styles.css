@@ -5,6 +5,8 @@ body {
         linear-gradient(to top left, lime, transparent),
         linear-gradient(to top right, blue, transparent);
     background-blend-mode: screen;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -24,10 +26,9 @@ div {
 
 .video-list-wrap {
     display: flex;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 100vh;
+    min-height: 93%;
 }
 
 .video-list {
@@ -44,19 +45,19 @@ div {
     width: 100%;
     display: grid;
     grid-template-columns: auto auto auto;
-    grid-gap: 20px;
-    padding: 10px;
+    justify-content: space-around;
     flex: none;
-
 }
 
-span {
-    width: 100%;
-    display: block;
+.video-list div a {
+    height: 80vh;
+    align-content: center;
+    width: 30vw;
     transition: transform 1s, background-color 1s;
+    cursor: pointer;
 }
 
-span:hover {
+.video-list div a:hover {
     transform: scale(1.1);
     background-color: rgba(0, 0, 0, 1);
 }

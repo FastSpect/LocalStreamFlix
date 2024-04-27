@@ -2,7 +2,7 @@ let scrollContainer = document.querySelector(".video-list");
 
 scrollContainer.addEventListener("wheel", (event) => {
     event.preventDefault();
-    scrollContainer.scrollLeft += event.deltaY;
+    scrollContainer.scrollLeft += event.deltaY*8;
     scrollContainer.style.scrollBehavior = "smooth";
 });
 
@@ -20,12 +20,12 @@ function fetchVideosAndFolders(endpoint) {
                     div = document.createElement("div");
                     videoList.appendChild(div);
                 }
-                const span = document.createElement("span");
+                // const span = document.createElement("span");
                 const link = document.createElement("a");
                 link.textContent = file;
                 link.href = `/video/${encodeURIComponent(data.path + file)}`;
-                span.appendChild(link);
-                div.appendChild(span);
+                // span.appendChild(link);
+                div.appendChild(link);
                 spanCount++;
             });
 
@@ -34,7 +34,7 @@ function fetchVideosAndFolders(endpoint) {
                     div = document.createElement("div");
                     videoList.appendChild(div);
                 }
-                const span = document.createElement("span");
+                // const span = document.createElement("span");
                 const link = document.createElement("a");
                 link.textContent = folder;
 
@@ -45,8 +45,8 @@ function fetchVideosAndFolders(endpoint) {
                     )}`;
                     fetchVideosAndFolders(`/videos${folderPath}/`);
                 };
-                span.appendChild(link);
-                div.appendChild(span);
+                // span.appendChild(link);
+                div.appendChild(link);
                 spanCount++;
             });
             videoList.appendChild(div);
