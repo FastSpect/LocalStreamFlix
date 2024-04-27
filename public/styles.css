@@ -10,6 +10,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    user-select: none;
 }
 
 div {
@@ -60,4 +61,9 @@ div {
 .video-list div a:hover {
     transform: scale(1.1);
     background-color: rgba(0, 0, 0, 1);
+}
+
+.selected {
+    border-color: white;
+    border-style: double;
 }
