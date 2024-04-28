@@ -12,10 +12,21 @@ document.addEventListener("keydown", (event) => {
         select(1);
     } else if (event.code === "ArrowLeft") {
         select(-1);
-    } else if (event.code === "ArrowUp") {
+    } else if (event.code === "Digit9" || event.code === "ArrowUp") {
         select(-3);
-    } else if (event.code === "ArrowDown") {
+    } else if (event.code === "Digit0" || event.code === "ArrowDown") {
         select(3);
+    } else if (
+        event.code === "Digit5" ||
+        event.code === "Digit8" ||
+        event.code === "Enter"
+    ) {
+        if (selection !== -1) {
+            const selectedAnchor = document
+                .getElementsByClassName("selected")
+                .item(0);
+            selectedAnchor.click();
+        }
     }
 });
 
@@ -32,11 +43,14 @@ function select(value) {
         else if (selection >= anchors.length) selection = 0;
         const selectedAnchor = anchors.item(selection);
         selectedAnchor.classList.add("selected");
+        selectedAnchor.scrollIntoViewIfNeeded();
     }
 }
 
 function fetchVideosAndFolders(endpoint) {
-    selection = 0;
+    selection = -1;
+    document.querySelector("h1").innerText =
+        "Current Directory: '" + endpoint + "'";
     fetch(endpoint)
         .then((response) => response.json())
         .then((data) => {
@@ -82,4 +96,4 @@ function fetchVideosAndFolders(endpoint) {
         );
 }
 
-fetchVideosAndFolders("/videos/Movies/");
+fetchVideosAndFolders("/videos/Videos/");
