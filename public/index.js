@@ -49,8 +49,12 @@ function select(value) {
 
 function fetchVideosAndFolders(endpoint) {
     selection = -1;
+    const cleanEndpoint = endpoint
+        .replaceAll("/", "")
+        .replaceAll("%20", " ")
+        .replace("videos", "D:\\");
     document.querySelector("h1").innerText =
-        "Current Directory: '" + endpoint + "'";
+        "Current Directory: '" + cleanEndpoint + "'";
     fetch(endpoint)
         .then((response) => response.json())
         .then((data) => {
