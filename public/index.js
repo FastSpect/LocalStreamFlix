@@ -1,3 +1,4 @@
+// index.js
 let scrollContainer = document.querySelector(".video-list");
 let selection = -1;
 
