@@ -1,0 +1,105 @@
+/* index.css */
+body {
+    font-family: Arial, sans-serif;
+    background:
+        linear-gradient(red, transparent),
+        linear-gradient(to top left, lime, transparent),
+        linear-gradient(to top right, blue, transparent);
+    background-blend-mode: screen;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    user-select: none;
+}
+
+div {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    color: #ffffff;
+}
+
+#title {
+    text-align: center;
+    background-color: #f7f7f7;
+    padding: 0.01%;
+}
+
+h1 {
+    font-family: Arial, sans-serif;
+    color: #333;
+    font-size: 36px;
+    text-shadow: 2px 2px 4px #ccc;
+}
+
+.video-list-wrap {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    min-height: 93%;
+}
+
+.video-list {
+    display: flex;
+    overflow-x: scroll;
+}
+
+
+.video-list::-webkit-scrollbar {
+    display: none;
+}
+
+.video-list div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-around;
+    flex: none;
+}
+
+a:link {
+    color: white;
+}
+
+a:visited {
+    color: lightcyan;
+}
+
+.video-list div a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    width: 30vw;
+    transition: transform 1s, background-color 1s;
+    cursor: pointer;
+    font-size: 36px;
+    text-shadow: 2px 2px 4px #ccc;
+    padding: 10px;
+}
+
+.video-list div a:hover {
+    transform: scale(1.1);
+    background-color: rgb(102, 102, 102);
+}
+
+
+.selected {
+    --angle: 0deg;
+    border: 0.5vmin solid;
+    border-image: conic-gradient(from var(--angle), red, orange, yellow, green, blue, indigo, violet, magenta, red) 1;
+    animation: 3s rotate linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        --angle: 360deg;
+    }
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
