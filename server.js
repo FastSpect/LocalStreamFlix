@@ -7,10 +7,10 @@ const port = 3000;
 
 const domainName = "192.168.0.217";
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "index")));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+    res.sendFile(path.join(__dirname, "index", "index.html"));
 });
 
 app.get("/videos*", (req, res) => {
